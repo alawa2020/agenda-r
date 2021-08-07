@@ -7,7 +7,7 @@ import {
 
 import Home from '../Home';
 import Agenda from '../Agenda';
-import Login from '../Login';
+import AuthHome from '../auth/AuthHome';
 import Menu from './Menu';
 
 const RouteComponent = () => {
@@ -18,7 +18,7 @@ const RouteComponent = () => {
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/agenda" component={Agenda} />
-                <Route pathF="/login" component={Login} />
+                <Route path="/login" component={AuthHome} />
             </Switch>
         </Router>
             
