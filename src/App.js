@@ -1,9 +1,10 @@
-
+import React from 'react';
+import RouteComponent from './components/routes/RouteComponent';
 
 function App() {
   return (
     <div>
-      <h1> hello from app</h1>
+      <RouteComponent />
     </div>
   );
 }
