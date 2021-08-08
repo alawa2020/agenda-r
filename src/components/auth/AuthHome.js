@@ -26,7 +26,7 @@ const AuthHome = () => {
                         <Login />
                     ) :
                     (
-                        <Register />
+                        <Register setViewLogin={setViewLogin}/>
                     )
             }
         </>
