@@ -1,14 +1,38 @@
 import React, { useState } from 'react'
-import auth from '../../firebase/auth';
+import {auth} from '../../firebase/auth';
+import { useHistory } from 'react-router-dom';
 
+import MsgError from './MsgError';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    const submitLoginUser = () => {
-        
+    const [msgError, setMsgError] = useState(null);
+
+    const historial = useHistory();
+
+    const onClickLoginUser = (e) => {
+        e.preventDefault();
+        auth.signInWithEmailAndPassword(email, pass)
+            .then( res => {
+                historial.push('/agenda');
+                console.log(res)
+                alert('Ha iniciado sesión.');
+            })
+            .catch( err => {
+                console.log(err);
+                if(err.code == 'auth/invalid-email'){
+                    setMsgError('Email inválido.');
+                    return;
+                }
+                if(err.code == 'auth/wrong-password'){
+                    setMsgError('Contraseña inválida.');
+                    return;
+                }
+
+            })
     }
 
 
@@ -44,11 +68,12 @@ const Login = () => {
                             <button 
                                 type="submit" 
                                 className="btn btn-success"
-                                onClick={submitLoginUser}
+                                onClick={onClickLoginUser}
                             >Iniciar Sesión</button>
 
                         </div>
                     </form>
+                    <MsgError msgError={msgError} />
                 </div>
                 <div className="col-2"></div>
             </div>
