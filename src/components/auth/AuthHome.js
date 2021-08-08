@@ -19,6 +19,7 @@ const AuthHome = () => {
                     style={{cursor:"pointer"}}
                     >Registrar</a>
             </nav>
+            
             {
                 (viewLogin) ?
                     (
