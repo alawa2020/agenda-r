@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {auth} from '../../firebase/auth';
+import { useHistory } from 'react-router-dom';
 
 const Menu = () => {
+
+    useEffect(() => {
+        auth.onAuthStateChanged(
+            user => {
+                if(user){
+                    setUser(user.email);
+                }
+            }
+        )
+    }, []);
+
+    const [user, setUser] = useState(null);
+    const historial = useHistory();
+
+    const onClickLogoutUser = () => {
+        auth.signOut();
+        setUser(null);
+        historial.push('/login');
+
+    }
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,6 +60,18 @@ const Menu = () => {
                     </ul>
 
                 </div>
+                {
+                (user != null)?
+                (
+                    <button 
+                        className="btn btn-dark text-danger"   
+                        type="button"
+                        onClick={onClickLogoutUser}
+                    >Cerrar Sesión</button>
+                ):
+                (<span></span>)
+                
+                }
             </nav>
         </>
     )
