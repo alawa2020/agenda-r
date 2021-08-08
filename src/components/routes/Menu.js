@@ -44,18 +44,28 @@ const Menu = () => {
                             > Home </Link>
                         </li>
                         <li className="nav-item">
-                            <Link
-                                className="nav-link text-primary"
-                                to="/agenda"
-                                aria-current="page"
-                            > Contactos </Link>
+                            {
+                                (user)?
+                                (
+                                    <Link
+                                        className="nav-link text-primary"
+                                        to="/agenda"
+                                        aria-current="page"
+                                    > Contactos </Link> 
+                                ):(<span></span>)
+                            }
                         </li>
                         <li className="nav-item">
-                            <Link
-                                className="nav-link text-primary"
-                                to="/login"
-                                aria-current="page"
-                            > Login </Link>
+                            {
+                                (!user)?
+                                (
+                                    <Link
+                                        className="nav-link text-primary"
+                                        to="/login"
+                                        aria-current="page"
+                                    > Login </Link>
+                                ):(<span></span>)
+                            }
                         </li>
                     </ul>
 
